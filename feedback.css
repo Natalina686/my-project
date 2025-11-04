@@ -1,0 +1,38 @@
+form {
+  background-color: #fff8e7;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
+  font-family: 'OpenDyslexic', Arial, sans-serif;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.btn, button {
+  font-family: 'OpenDyslexic', Arial, sans-serif;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover, button:hover {
+  background-color: #005fa3;
+}
+
+small {
+  color: #555;
+  font-size: 0.9rem;
+}

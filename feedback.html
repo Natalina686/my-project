@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+   <main>
+    <h2>💬 Feedback for the story</h2>
+
+    <form id="feedback-form" aria-label="Feedback form for the story">
+        <label for="name">Your name</label>
+        <input type="text" id="name" placeholder="Type your name" required area-required="true" />
+
+        <label for="favorite-part">Your favorite part:</label>
+        <textarea  id="favorite-part" name="favorite-part" placeholder="Write a short note" aria-describedby="part-help"></textarea>
+        <small id="part-help">Example: "When the squirrel jumps."</small>
+
+        <button type="submit" aria-label="Send your feedback">Send Feedback</button>
+    </form>
+   </main>
+
+   <script>
+    document.getElementById("feedback-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("✅ Thank you for your feedback!");
+        e.target.reset();
+    })
+   </script>
+</body>
+</html>
