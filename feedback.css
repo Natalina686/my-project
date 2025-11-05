@@ -7,6 +7,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  font-family: 'OpenDyslexic', Arial, sans-serif;
 }
 
 input, textarea {
@@ -15,6 +16,31 @@ input, textarea {
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  width: 100%;
+}
+
+fieldset {
+  border: 2px solid #f5c16c;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+legend {
+  font-weight: bold;
+  color: #444;
+  padding: 0 6px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
 }
 
 .btn, button {
@@ -35,4 +61,42 @@ input, textarea {
 small {
   color: #555;
   font-size: 0.9rem;
+}
+
+fieldset.rating {
+  border: none;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 5px;
+}
+
+.rating legend {
+  font-weight: bold;
+  color: #444;
+  text-align: center;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ffcc33;
+}
+
+
+.rating input:checked ~ label {
+  color: #ffcc33;
 }

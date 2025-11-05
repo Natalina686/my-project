@@ -12,20 +12,57 @@
 
     <form id="feedback-form" aria-label="Feedback form for the story">
         <label for="name">Your name</label>
-        <input type="text" id="name" placeholder="Type your name" required area-required="true" />
+        <input type="text" id="name" placeholder="Type your name" required aria-required="true" />
 
         <label for="favorite-part">Your favorite part:</label>
         <textarea  id="favorite-part" name="favorite-part" placeholder="Write a short note" aria-describedby="part-help"></textarea>
         <small id="part-help">Example: "When the squirrel jumps."</small>
 
+
+        <fieldset class="rating">
+        <legend>⭐ Rate our website:</legend>
+
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5" title="5 stars">★</label>
+
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4" title="4 stars">★</label>
+
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3" title="3 stars">★</label>
+
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2" title="2 stars">★</label>
+
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1" title="1 star">★</label>
+      </fieldset>
+
+        <label>
+            <input type="checkbox" name="subscribe">
+            I want to recieve news
+        </label>
+
         <button type="submit" aria-label="Send your feedback">Send Feedback</button>
+
+      
     </form>
+
+
    </main>
 
    <script>
     document.getElementById("feedback-form").addEventListener("submit", (e) => {
         e.preventDefault();
-        alert("✅ Thank you for your feedback!");
+
+        const name = document.getElementById("name").value.trim();
+        const rating = document.querySelector("input[name='rating']:checked")?.value;
+        if (!rating) {
+            alert("⭐ Please select a rating before submitting!");
+            return;
+        }
+
+        alert(`✅ Thank you, ${name || "friend"}! Your rating: ${rating}/5`);
         e.target.reset();
     })
    </script>
