@@ -9,7 +9,8 @@
 </head>
 <body>
     <main>
-        <article aria-label="Story about autumn" id="text-content">
+
+        <article aria-label="Story about autumn" id="text-content" lang="en">
             <h2>The Forest in Autumn</h2>
 
             <img src="autumn_in_the_forest.jpg" alt="A sunny autumn forest with colorful leaves">
@@ -25,7 +26,15 @@
                 Autumn is full of colors and quiet magic.
             </p>
         </article>
-        <button id="read-btn" aria-label="Read aloud">📖 Read Aloud</button>
+
+         <div class="reader-controls" role="group" aria-label="Text reader controls">
+        <button id="read-btn" aria-label="Start reading"><span aria-hidden="true">▶️</span> Read</button>
+        <button id="pause-btn" aria-label="Pause reading"><span aria-hidden="true">⏸️</span> Pause</button>
+        <button id="stop-btn" aria-label="Stop reading"><span aria-hidden="true">⏹️</span> Stop</button>
+        </div>
+
+
+        
         <a href="./feedback.html" class="btn" aria-label="Go to the  feedback">💬 Go to the feedback</a>
     </main>
 

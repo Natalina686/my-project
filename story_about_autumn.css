@@ -63,12 +63,38 @@ button:hover {
 
 
 
-    footer {
+footer {
       text-align: center;
       font-size: 0.9em;
       color: #666;
     }
 
-    a {
+a {
       color: #0077cc;
     }
+
+.highlight {
+  background-color: #ffec99;
+  transition: background-color 0.2s ease;
+}
+
+.reader-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.reader-controls button {
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  font-family: 'OpenDyslexic', sans-serif;
+}
+
+.reader-controls button:hover {
+  background-color: #45a049;
+}
