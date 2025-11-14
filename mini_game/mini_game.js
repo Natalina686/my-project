@@ -4,19 +4,38 @@ const words = [
     { wrong: "strawbery", correct: "strawberry"},
     { wrong: "elefant", correct: "elephant"},
     { wrong: "giraf", correct: "giraffe"},
-]
+];
 
-const randomWord = words[Math.floor(Math.random() * words.length)];
+function checkWord(wordObj) {
+    const answer = prompt(`Виправ слово: ${wordObj.wrong}`);
 
-const userAnswer = prompt(`Виправ слово: ${randomWord.wrong}`);
+    if (!answer) {
+        alert("⚠️ Введи хоч щось!");
+        return false;
+    }
 
-if (userAnswer && userAnswer.toLowerCase() === randomWord.correct.toLowerCase()) {
-    alert("Молодець! Правильно!");
-} else {
-    alert(`Спробуй ще! Правильне слово: ${randomWord.correct}`);
+    if (answer.toLowerCase() === wordObj.correct.toLowerCase()) {
+        alert("✅ Молодець! Правильно!");
+        return true;
+    } else {
+        alert(`❌ Помилка! Правильне слово: ${wordObj.correct}`);
+        return false;
+    }
 }
 
-for (let i = 0; i < 5; i++) {
-  const randomWord = words[Math.floor(Math.random() * words.length)];
-  console.log(randomWord.wrong);
+let score = 0;
+const rounds = 5;
+
+for (let i = 0; i < rounds; i ++) {
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+
+    const isCorrect = checkWord(randomWord);
+
+    if (isCorrect) {
+        score += 1;
+    }
 }
+
+alert(`Гру закінчено!\nТвій результат: ${score} з ${rounds}`);
+
+
