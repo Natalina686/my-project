@@ -1,3 +1,5 @@
+
+
 const dictionary = {
     easy: [
         {wrong: "aplpe", correct: "apple"},
@@ -17,9 +19,17 @@ const dictionary = {
 }
 
 function chooseDifficulty() {
-    const level = prompt(
-        "Вибери рівень складності:\n1 - Легкий\n2 - Середній\n3 - Складний"
-    );
+
+    const raw = prompt(
+    "Вибери рівень складності:\n1 - Легкий\n2 - Середній\n3 - Складний"
+  );
+
+  if (raw === null) {
+    alert("Вибір скасовано — оберемо легкий рівень.");
+    return "easy";
+  }
+
+    const level = raw.trim();
 
     if (level === "1") return "easy";
     if (level === "2") return "medium";
@@ -43,7 +53,7 @@ function playRound(wordObj) {
     const hints = getHints(wordObj.correct);
 
     const raw = prompt(
-        `Виправ слово: ${wordObj.wrong}\n\n${hints}\nВВеди правильне слово:`
+        `Виправ слово: ${wordObj.wrong}\n\n${hints}\nВведи правильне слово:`
     );
 
     if (raw === null) {
@@ -67,19 +77,82 @@ function playRound(wordObj) {
     return false;
 }
 
+function getProgress() {
+    const data = localStorage.getItem("wordFixerProgress");
+    if (!data) {
+        return {
+            totalGames: 0,
+            bestScore: 0,
+            allScores: []
+        };
+    }
+
+    try {
+        return JSON.parse(data);
+    } catch (e) {
+        console.warn("Некоректні дані у localStorage, скидаємо прогрес.", e);
+        return {
+            totalGames: 0,
+            bestScore: 0,
+            allScores: []
+        };
+    }
+}
+
+function saveProgress(progress) {
+    localStorage.setItem("wordFixerProgress", JSON.stringify(progress));
+}
+
+function getTopScores() {
+    const progress = getProgress();
+    const sorted = [...progress.allScores].sort((a, b) => b - a);
+    return sorted.slice(0, 5);
+}
+
+
 function startGame() {
     const difficulty = chooseDifficulty();
-    const wordsArray = dictionary[difficulty];
+    const wordsArray = [...dictionary[difficulty]];
 
     let score = 0;
-    const rounds = 10;
+    const rounds = Math.min(10, wordsArray.length);
 
     for (let i = 0; i < rounds; i++) {
-        const randomWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
+        const idx = Math.floor(Math.random() * wordsArray.length);
+    const [randomWord] = wordsArray.splice(idx, 1);
 
         if (playRound(randomWord)) score++;
     }
-    alert(`🎮Гру завершено!\nТвій результат: ${score} з ${rounds}`);
+    alert(`🎮 Гру завершено!\nТвій результат: ${score} з ${rounds}`);
+
+    const progress = getProgress();
+
+    progress.totalGames++;
+    progress.allScores.push(score);
+
+    if (score > progress.bestScore) {
+        progress.bestScore = score;
+        alert("🏆 Новий рекорд! Вітаю!");
+    }
+
+    saveProgress(progress);
+
+    alert(
+        `📊 Статистика:\n` +
+        `Ігор зіграно: ${progress.totalGames}\n` +
+        `Найкращий результат: ${progress.bestScore}\n` +
+        `Останні результати: ${progress.allScores.join(", ")}`
+    );
+
+
+const top = getTopScores();
+if (top.length === 0) {
+    alert("🏅 Поки що немає результатів для ТОП-5.");
+  } else {
+    alert(`🏅 ТОП-5 результатів:\n${top.join("\n")}`);
+  }
 }
+
+
 
 startGame();
