@@ -6,8 +6,19 @@ const words = [
     { wrong: "giraf", correct: "giraffe"},
 ];
 
-function checkWord(wordObj) {
-    const answer = prompt(`Виправ слово: ${wordObj.wrong}`);
+function getHints(word) {
+    return `
+    ПІДКАЗКИ:
+    - Слово має "${word.charAt(0)}""
+    - Закінчується на: "${word.charAt(word.length - 1)}"
+    - Перші 2 букви: "${word.slice(0, 2)}"`;
+}
+
+function playRound(wordObj) {
+    const hints = getHints(wordObj.correct);
+
+
+    const answer = prompt(`Виправ слово: ${wordObj.wrong}\n\n${hints}\nВведи правильне слово:}`);
 
     if (!answer) {
         alert("⚠️ Введи хоч щось!");
@@ -29,11 +40,8 @@ const rounds = 5;
 for (let i = 0; i < rounds; i ++) {
     const randomWord = words[Math.floor(Math.random() * words.length)];
 
-    const isCorrect = checkWord(randomWord);
+    if (playRound(randomWord)) score++;
 
-    if (isCorrect) {
-        score += 1;
-    }
 }
 
 alert(`Гру закінчено!\nТвій результат: ${score} з ${rounds}`);
